@@ -3,6 +3,7 @@ const app = express()
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var path = require('path')
+var Usuario = require ('./model/usuario')
 
 //CONFIGURAÇÃO DO SISTEMA\\
 
@@ -21,12 +22,30 @@ app.get('/', function(req,res){
     res.render('index.ejs',{})
 })
 
-app.get('/usuarios', function(req,res){
-    res.render('usuarios.ejs',{usuarios:[
-        {nome:'Junior',email:'juniormachdo11@gmail.com'},
-        {nome:'Adm',email:'adm@gmail.com'}
-    ]})
+
+//ADICIONAR\\
+
+app.get('/add', function(req,res){
+    res.render('adiciona.ejs')
 })
+
+app.post('/add', function(req,res){
+    var usuario = new Usuario({
+        nome: req.body.txtNome,
+        email: req.body.txtEmail,
+        senha: req.body.txtSenha,
+        foto: req.body.txtFoto
+    })
+    usuario.save(function(err){
+        if(err){
+            console.log(err)
+        }else{
+            res.redirect('/')
+        }
+    })
+})
+
+/////////////////////////////////////
 
 app.listen(3000, function(){
     console.log("Conexão inicializada na porta 3000")
