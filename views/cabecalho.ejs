@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
     <style>
+        body{
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;          
+            background-color: rgb(255, 255, 255);
+        }
         table,td,th {
             border: 1px solid black;
         }
@@ -15,12 +22,57 @@
         td,th{
             padding: 5px;
         }
+        .foto{
+            max-width: 100px;
+            max-height: 50px;
+        }
+        h1{
+            color: white;
+        }
+        .Adiciona{
+            font-size: 25px;
+            background-color: rgb(70, 70, 70);
+            color: white;
+            text-decoration: inherit;
+            border-radius: 6px;
+            height: 200px;
+            margin-right: 25px;
+        }
+        .Listar{
+            font-size: 25px;
+            background-color: rgb(70, 70, 70);
+            color: white;
+            text-decoration: inherit;
+            border-radius: 6px;
+            height: 200px;
+        }
+        .Listar:hover{
+            color: black;
+            background-color: white;
+        }
+        .Adiciona:hover{
+            color: black;
+            background-color: white;
+        }
+        .divh1{
+            background-color: black;
+        }
+        .lixeira{
+            margin-left: 10px;
+            width: 40px;
+            height: 40px;
+        }
+
     </style>
+    
 </head>
 <body>
-    <h1>LUsuários</h1>
-    <ul>
-        <li><a href="/add">Adiciona</a></li>
-        <li><a href="/">Listar</a></li>
-    </ul>
+    <div class="divh1">
+    <center>
+    <h1>Usuários</h1>
+</center>
+        <a class="Adiciona" href="/add">Adicionar</a>
+        <a class="Listar" href="/">Listar</a>
+    </div>
+    
     <br>
