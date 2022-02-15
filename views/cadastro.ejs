@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            display:flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-attachment: fixed;
+            background: linear-gradient(136deg, rgb(20, 20, 20), rgb(180, 180, 180));
+        }
+        .container{
+            max-width: 700px;
+            width: 100%;
+            background: linear-gradient(to top, rgb(48, 48, 48), rgb(153, 151, 151), rgb(105, 105, 105));
+            padding: 10px 30px;
+            border-radius: 15px;
+            border: 2px solid white;
+        }
+        .container .title{
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+        .container .title::before{
+            content: '';
+            left: 0;
+            bottom: 0;
+            position: absolute;
+            height: 3px;
+            width: 30px;
+            background: linear-gradient(136deg, rgb(54, 54, 54), rgb(116, 115, 115));
+        }
+        .container form .user-details{
+            display:flexbox;
+            flex-wrap:wrap;
+            justify-content: space-between;
+            margin: 20px 0 12px 0;
+        }
+        form .user-details .input-box{
+            margin-bottom: 15px;
+            width: calc(100% / 2 -20px);  
+        }
+        .user-details .input-box .details{
+            display: block;
+            font-weight: 500;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .user-details .input-box input{
+            height: 45px;
+            width: 100%;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding-left: 15px;
+            font-size: 16px;
+            border-bottom-width: 2px;
+            transition: all 0,3s ease;
+        }
+        .user-details .input-box input:focus,
+        .user-details .input-box input:valid{
+            border-color: rgb(0, 0, 0);
+        }
+        form .gender-details .gender-title{
+            font-size: 20px;
+            font-weight: 500;
+        } 
+        form .gender-details .category{
+            display: flex;
+            width: 80%;
+            margin: 14px 0;
+            justify-content: space-between;
+        }
+        .gender-details .category label{
+            display: flex;
+            align-items: center;
+        }
+        .gender-details .category .dot{
+            height: 15px;
+            width: 15px;
+            background: #c5c5c5;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        #dot-1:checked ~ .category label .one,
+        #dot-2:checked ~ .category label .two,
+        #dot-3:checked ~ .category label .three{
+            border-color: #c5c5c5;
+            background: black;
+        }
+        form input[type="radio"]{
+            display: none;
+        }
+        form .button{
+            height: 45px;
+            margin: 45px 0;
+        }
+        form .button input{
+            height: 100%;
+            width: 100%;
+            outline: none;
+            color: #fff;
+            border: 2px solid white;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 5px;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, rgb(54, 54, 54), rgb(112, 112, 112), rgb(54, 54, 54));
+        }
+        form .button input:hover{
+            background: linear-gradient(to right, rgb(100, 100, 100), rgb(182, 182, 182), rgb(100, 100, 100));;
+        }
+        @media (max-width:584px) {
+            .container{
+                max-width: 100%;
+            }
+            form .user-details .input-box{
+                margin-bottom: 15px;
+                width: 100%;
+            }
+            form .gender-details .category{
+                width: 100%;
+            }
+            .container form .user-details{
+                max-height: 300px;
+                overflow-y: scroll;
+            }
+            .user-details::-webkit-scrollbar{
+                width: 0;
+            }
+        }
+        a{
+            text-decoration: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title"> Registrar-se</div>
+        <form method="post">
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Nome</span>
+                    <input type="text" name="txtNome" id="" placeholder="Digite seu nome" required> 
+                </div>
+                <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="text" name="txtEmail" id="" placeholder="Digite seu email" required> 
+                </div>
+                <div class="input-box">
+                    <span class="details">Numero de Celular</span>
+                    <input type="text" name="txtNumero" id="" placeholder="Digite seu celuar" required> 
+                </div>
+                <div class="input-box">
+                    <span class="details">CPF</span>
+                    <input type="text" name="txtCPF" id="" placeholder="Digite seu senha" required> 
+                </div>
+                <div class="input-box">
+                    <span class="details">Senha</span>
+                    <input type="password" name="txtSenha" id="" placeholder="Digite sua senha" required> 
+                </div>
+            </div>
+            <div class="gender-details">
+                <input type="radio" name="txtSexo" id="dot-1">
+                <input type="radio" name="txtSexo" id="dot-2">
+                <input type="radio" name="txtSexo" id="dot-3">
+                <span class="gender-title">Gender</span>
+                <div class="category">
+                    <label for="dot-1">
+                        <span class="dot one"></span>
+                        <span class="gender">Homem</span>
+                    </label>
+                    <label for="dot-2">
+                        <span class="dot two"></span>
+                        <span class="gender">Mulher</span>
+                    </label>
+                    <label for="dot-3">
+                        <span class="dot three"></span>
+                        <span class="gender">Preferir não informar</span>
+                    </label>
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Registrar">
+                <br>
+            </div>
+        </form>
+        <form action="/">
+            <div class="button"> 
+            <input  type="submit" value="Voltar">
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>
