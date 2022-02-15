@@ -87,7 +87,36 @@ app.post('/edit/:id',upload.single("txtFoto") ,function(req,res){
         res.redirect('/')
     })
 })
+//CADASTRO\\
+app.get('/cadastro', function(req,res){
+    res.render('cadastro.ejs')
+})
+app.post('/cadastro', function(req,res){
+    var usuario = new Usuario({
+        nome: req.body.txtNome,
+        email: req.body.txtEmail,
+        cpf: req.body.txtCPF,
+        senha: req.body.txtSenha,
+        sexo: req.body.txtSexo
+        //req.file.filename
+    })
+    usuario.save(function(err){
+        if(err){
+            console.log(err)
+        }else{
+            res.redirect('/')
+        }
+    })
+})
 
+//LOGIN\\
+app.get('/login', function(req,res){
+    res.render('login.ejs')
+})
+
+app.post('/login', function(req,res){
+
+})
 app.listen(3000, function(){
     console.log("Conexão inicializada na porta 3000")
     }  

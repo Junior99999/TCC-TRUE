@@ -1,34 +1,40 @@
 <%-include('cabecalho.ejs')%>
-    <form method="post">
-        Pesquisar : <input type="text" name="txtPesquisa" placeholder="Pesquisar">
-        <input type="submit" value="Pesquisar">
-    </form>
+    <center>
+        <form method="post" class="formPesq">
+            <input type="text" name="txtPesquisa" placeholder="Pesquisar" style="font-size: 20px;" >
+            <a type="submit"><img class="lupa" src="fotos/lupa.png" ></a>
+        </form>
+    </center>   
     <br>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Foto</th>
-            <th>Deletar</th>
-            <th>Editar</th>
-        </tr>
-        <%for(usuario of Usuarios){%>
-        <tr>
-            <td><%=usuario._id%></td>
-            <td><%=usuario.nome%></td>
-            <td><%=usuario.email%></td>
-            <td><img class="foto" src="/fotos/<%=usuario.foto%>"></td>
-            <td>
-               <a href="/del/<%=usuario._id%>">
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Foto</th>
+                <th>Deletar</th>
+                <th>Editar</th>
+            </tr>
+            <%for(usuario of Usuarios){%>
+            <tr>
+                <td><%=usuario._id%></td>
+                <td><%=usuario.nome%></td>
+                <td><%=usuario.email%></td>
+                <td><img class="foto" src="/fotos/<%=usuario.foto%>"></td>
+                <td>
+                <a href="/del/<%=usuario._id%>">
 
-                    <img class="lixeira" src="fotos/lixeira.png">
+                        <img class="lixeira" src="fotos/lixeira.png">
 
-                </a>
-            </td><td>
-                <a href="/edit/<%=usuario._id%>">Editar</a>
-            </td>
-        </tr>
-        <% } %>
-    </table>
+                    </a>
+                </td><td>
+                    <a href="/edit/<%=usuario._id%>">Editar</a>
+                </td>
+            </tr>
+            <% } %>
+        </table>
+    </div>
+    <div>
+    </div>
 <%-include('rodape.ejs')%>
