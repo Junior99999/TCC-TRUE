@@ -1,13 +1,27 @@
-const express = require('express')
-const app = express()
+// Importações
+
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var path = require('path')
-var Usuario = require ('./model/usuario')
-const { redirect } = require('express/lib/response')
 var upload = require('./config/configMulter')
+const express = require('express')
+const { redirect } = require('express/lib/response')
+const session =  require('express-session')
+const flash = require('connect-flash')
+const passport = require('passport')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { findOne } = require('./model/Usuario')
+
+/////////////Models////////////////////////////////
+var Adm = require('./model/Administrador')
+var Usuario = require ('./model/Usuario')
+///////////////////////////////////////////////////
+
+const app = express()
 
 //CONFIGURAÇÃO DO SISTEMA\\
+app.use(express.json())
 
 app.use(cookieParser())
 
@@ -17,6 +31,13 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.set("view engine", "ejs")
 
 app.use(express.static(path.join(__dirname,"public")))
+
+app.use(session({ secret: "secret", saveUninitialized:true, resave:true}))
+
+app.use(flash())
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 //ROTAS PARA EJS\\
 
@@ -34,6 +55,7 @@ app.post('/', function(req,res){
 
 ///////////////////////////////////
 //ADICIONAR\\
+
 
 app.get('/add', function(req,res){
     res.render('adiciona.ejs')
@@ -87,35 +109,89 @@ app.post('/edit/:id',upload.single("txtFoto") ,function(req,res){
         res.redirect('/')
     })
 })
-//CADASTRO\\
+/////////////////////
+//CADASTRO USUÁRIO\\
 app.get('/cadastro', function(req,res){
     res.render('cadastro.ejs')
 })
-app.post('/cadastro', function(req,res){
-    var usuario = new Usuario({
+app.post('/cadastro', async (req,res) =>{
+
+    const {txtNome, txtEmail, txtSenha, txtConfirmasenha, txtNumero, txtCPF} = req.body
+
+    //Validações
+    if(!txtNome){
+        return console.log('O nome é Obrigatório')
+    }if(!txtEmail){
+        return console.log('O email é Obrigatório')
+    }if(!txtSenha){
+        return console.log('A senha é Obrigatório')
+    }if(!txtCPF){
+        return console.log('O CPF é Obrigatório')
+    }if(!txtNumero){
+        return console.log('O número é Obrigatório')
+    }
+
+    if(txtSenha !== txtConfirmasenha){
+        return console.log('A senhas não conferem')
+    }
+
+    const userExist  = await Usuario.findOne({ email: txtEmail})
+    
+    if(userExist){
+        return console.log('Utilize outro email!')
+    }
+
+    const salt = await bcrypt.genSalt(12)
+    const senhaHash = await bcrypt.hash(txtSenha, salt)
+
+    const user = new Usuario({
         nome: req.body.txtNome,
         email: req.body.txtEmail,
         cpf: req.body.txtCPF,
-        senha: req.body.txtSenha,
-        sexo: req.body.txtSexo
-        //req.file.filename
+        senha: senhaHash,
     })
-    usuario.save(function(err){
-        if(err){
-            console.log(err)
-        }else{
-            res.redirect('/')
-        }
-    })
+    try{
+        await user.save()
+        console.log('Registrado com sucesso')
+        return res.redirect('/')
+        
+    }catch(error){
+        console.log('Aconteceu um erro')
+    }
 })
-
-//LOGIN\\
+///////////////////
+//LOGIN USUÁRIO\\
 app.get('/login', function(req,res){
     res.render('login.ejs')
 })
 
-app.post('/login', function(req,res){
+app.post('/login', async (req,res) =>{
+    const {txtEmail, txtSenha} = req.body
 
+    //Validações
+    if(!txtEmail){
+        return console.log('O email é Obrigatório')
+    }if(!txtSenha){
+        return console.log('A senha é Obrigatório')
+    }
+    //checar se existe o usuário
+    const user = await Usuario.findOne({ email: txtEmail})
+
+    if(!user){
+        return console.log('Usuário não encontrado')
+    }
+
+    //checar se a senha confirma
+    const checarSenha = await bcrypt.compare(txtSenha, user.senha)
+
+    if(!checarSenha){
+        return console.log('Senha inválida')
+    }
+    try{
+        return console.log('Logado com sucesso')
+    }catch(Error){
+        console.log('Aconteceu um erro')
+    }
 })
 app.listen(3000, function(){
     console.log("Conexão inicializada na porta 3000")

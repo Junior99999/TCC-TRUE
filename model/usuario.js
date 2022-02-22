@@ -5,7 +5,6 @@ var UsuarioSchema = conexao.Schema({
     email:{type:String},
     senha:{type:String},
     numero:{type:String},
-    sexo:{type:String},
     cpf:{type:String}
 })
 
