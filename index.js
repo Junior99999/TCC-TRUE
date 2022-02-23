@@ -271,7 +271,7 @@ app.post('/admcadastro', async (req,res) =>{
     }catch(error){
         console.log('Aconteceu um erro')
     } 
-})
+})   
 app.listen(3000, function(){
     console.log("Conexão inicializada na porta 3000")
     }  
