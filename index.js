@@ -69,7 +69,7 @@ app.post('/add',upload.single("txtFoto") ,function(req,res){
     usuario.save(function(err){
         if(err){
             console.log(err)
-        }else{
+        }else{ 
             res.redirect('/')
         }
     })
