@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 app.set("view engine", "ejs")
 
-app.use(express.static(path.join(__dirname,"public")))
+app.use(express.static(path.join(__dirname,"/public/assets")))
 
 app.use(session({ secret: "secret", saveUninitialized:true, resave:true}))
 
