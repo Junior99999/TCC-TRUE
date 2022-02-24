@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link REL="SHORTCUT ICON" HREF="fotos/cruz_vermelha.png">   
+    <title>ADM LOGIN</title>
+    <style>
+                @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
+            body{
+                margin-top: 200px;
+                height: 100hv;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-attachment: fixed;
+                background-color: #4070f4;
+            }
+            .container{
+                position: relative;
+                max-width: 430px;
+                width: 100%;
+                background: #fff;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                border-radius: 10px;
+                padding-top: 20px;
+
+            }
+            .container .form{
+                padding: 30px;
+                border-radius: 10px;
+            }
+            .container .form .title{
+                position: relative;
+                font-size: 27px;
+                font-weight: 600;
+            }
+            .form .title::before{
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 3px;
+                width: 30px;
+                background-color: #4070f4;
+                border-radius: 25px;
+            }
+            .form .input-field {
+                position: relative;
+                height: 50px;
+                width: 100%;
+                margin-top: 30px;
+            }
+            .input-field input{
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                padding: 0 35px;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                border-bottom:2px solid  #ccc;
+                border-top:2px solid transparent;
+                transition: all 0,3s ease;
+            }
+            .input-field input:is(:focus, :valid){
+                border-bottom-color: #4070f4;  
+            }
+            .input-field input:is(:focus, :valid) ~ i{
+                border-bottom-color: #4070f4;  
+            }
+            .input-field i {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #999;
+                font-size: 23px;
+            }
+            .input-field input:is(:focus, :valid) ~ i{
+                color: #4070f4;  
+            }
+            .input-field i.icon{
+                left: 0;
+            } 
+            .input-field i.showHidePw{
+                right: 0;
+            }
+            .form .button{
+                margin-top: 35px;
+            } 
+            .form .button input{
+                border: none;
+                color: #fff;
+                font-size: 17px;
+                font-weight: 500;
+                letter-spacing: 1px;
+                border-radius: 6px;
+                background-color: #4070f4;
+                cursor: pointer;
+                transition: all 0,3s ease;
+            }
+            .button input:hover{
+                background-color: #265df2;
+            }
+            .form .login-signup{
+                margin-top: 30px;
+                text-align: center;
+            }
+            a{
+                text-decoration: none;
+            } 
+            .admImg{
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                margin-left: 10px;
+                margin-top: -20.2px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="forms">
+            <div class="form login">
+                <span class="title">Login Administrador</span>
+                <img class="admImg" src="fotos/ADM.png" alt="ADM">
+                <form method="post">
+
+                    <div class="input-field">
+                        <input  type="text"
+                                name="admEmail" 
+                                placeholder="Digite seu Email" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input  type="password" 
+                                name="admSenha"
+                                class="password" 
+                                placeholder="Digite sua Senha" required>
+                        <i class="uil uil-lock-open-alt"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+                    <div class="input-field button">
+                        <input type="submit" name="" id="" value="Logar-se">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const container = document.querySelector(".container"),
+              pwShowHide = document.querySelectorAll(".showHidePw"),
+              pwFields = document.querySelectorAll(".password");
+
+            pwShowHide.forEach(eyeIcon =>{
+                eyeIcon.addEventListener("click", ()=>{
+                    pwFields.forEach(pwField =>{
+                        if(pwField.type === "password"){
+                            pwField.type = "text"
+
+                            pwShowHide.forEach(icon =>{
+                                icon.classList.replace("uil-eye-slash","uil-eye")
+                            })
+                        }else{
+                            pwField.type = "password"
+                            pwShowHide.forEach(icon =>{
+                                icon.classList.replace("uil-eye","uil-eye-slash")
+                            })          
+                        }
+                    })
+                })
+            })
+    </script>
+</body>
+</html>

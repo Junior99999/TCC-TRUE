@@ -1,0 +1,39 @@
+{
+  "name": "tcc",
+  "version": "1.0.0",
+  "description": "TCC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Junior99999/TCC-TRUE.git"
+  },
+  "author": "José Wilson Machado Juniot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Junior99999/TCC-TRUE/issues"
+  },
+  "homepage": "https://github.com/Junior99999/TCC-TRUE#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.2",
+    "multer": "^1.4.4",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "routes": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
