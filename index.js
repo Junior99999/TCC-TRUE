@@ -169,10 +169,11 @@ app.get('/login', function(req,res){
 
 app.post('/login', async (req,res) =>{
     const {txtEmail, txtSenha} = req.body
+    let erro = []
 
     //Validações
     if(!txtEmail){
-        return console.log('O email é Obrigatório')
+        erro.push({msg : 'O email é Obrigatório'})
     }if(!txtSenha){
         return console.log('A senha é Obrigatório')
     }
@@ -222,6 +223,7 @@ app.post('/admlogin', async (req,res) =>{
         return console.log('Senha inválida')
     }
     try{
+
         return console.log('Logado com sucesso')
     }catch(Error){
         console.log('Aconteceu um erro')
