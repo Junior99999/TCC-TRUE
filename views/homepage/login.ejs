@@ -12,6 +12,11 @@
 <body>
     <div class="container">
         <div class="forms">
+            <div>
+                <%if (typeof msg !== "undefined") {%>
+                    <%= msg %>
+                <% } %>
+            </div>
             <div class="form login">
                 <span class="title">Login</span>
                 <form method="post">

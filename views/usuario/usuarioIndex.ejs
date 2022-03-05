@@ -1,0 +1,41 @@
+<%-include('cabecalho.ejs')%>
+       
+
+<div class="divh1">
+    
+    
+    <div class="divpaibotao">
+        <div class="botaoCabecalho">
+            <h1><%=Usuario.nome%></h1>
+        </div>
+    </div>
+    <nav role="navigation">
+        <div id="menuToggle">
+
+            <input type="checkbox" />
+
+            <span></span>
+            <span></span>
+            <span></span>
+  
+                <ul id="menu">
+                    <a href="/"><li>Página  Inicial</li></a>
+                    <a href="#"><li>Proficionais</li></a>
+                    <a href="#"><li>Informações</li></a>
+                    <a href="#"><li>Contato</li></a>
+                </ul>
+        </div>
+    </nav>
+</div>
+
+
+<div class="body">
+    <div class="carrossel"></div>
+    <div class="profissionais"></div>
+    <div class="Informações"></div>
+    <div class="Contato"></div>
+
+
+</div>
+
+<%-include('rodape.ejs')%>

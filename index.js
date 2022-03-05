@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+}
 // Importações
 
 var bodyParser = require('body-parser')
@@ -7,43 +10,41 @@ var upload = require('./config/configMulter')
 const express = require('express')
 const { redirect } = require('express/lib/response')
 const session =  require('express-session')
-const flash = require('connect-flash')
+const flash = require('express-flash')
+const passport_config = require('./config/passport-config')
 const passport = require('passport')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { findOne } = require('./model/Usuario')
-
-/////////////Models////////////////////////////////
 var Adm = require('./model/Administrador')
 var Usuario = require ('./model/Usuario')
-///////////////////////////////////////////////////
+const autenticacao = require('./config/autenticacao')
+const autenticacaoAdm = require('./config/autenticacaoAdm')
 
 const app = express()
 
 //CONFIGURAÇÃO DO SISTEMA\\
 app.use(express.json())
-
 app.use(cookieParser())
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
-
 app.set("view engine", "ejs")
-
 app.use(express.static(path.join(__dirname,"public")))
-
-app.use(session({ secret: "secret", saveUninitialized:true, resave:true}))
-
 app.use(flash())
-
+app.use(session({ 
+    secret: process.env.SESSION_SECRET,
+    resave:true,
+    saveUninitialized:true, 
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
+
+
 //ROTAS PARA EJS\\
 
-app.get('/', function(req,res){
+app.get('/',  function(req,res){
     Usuario.find({}).exec(function(err,docs){
-        res.render('index.ejs',{Usuarios:docs})
+        res.render('./homepage/index.ejs',{Usuarios:docs})
     })
     
 })
@@ -53,10 +54,10 @@ app.post('/', function(req,res){
     })    
 })
 
-///////////////////////////////////
+
 //ADICIONAR\\
 app.get('/add', function(req,res){
-    res.render('adiciona.ejs')
+    res.render('./adm/adiciona.ejs')
 })
 
 app.post('/add',upload.single("txtFoto") ,function(req,res){
@@ -75,7 +76,8 @@ app.post('/add',upload.single("txtFoto") ,function(req,res){
     })
 })
 
-/////////////////////////////////////
+
+
 //DELETAR\\
 app.get('/del/:id',function(req,res){
     Usuario.findByIdAndDelete(req.params.id, function(err){
@@ -86,7 +88,8 @@ app.get('/del/:id',function(req,res){
         }
     })
 })
-////////////////////////////////////
+
+
 
 //EDITAR\\
 app.get('/edit/:id', function(req,res){
@@ -110,10 +113,11 @@ app.post('/edit/:id',upload.single("txtFoto") ,function(req,res){
     })
 })
 
-/////////////////////
+
+
 //CADASTRO USUÁRIO\\
 app.get('/cadastro', function(req,res){
-    res.render('cadastro.ejs')
+    res.render('./homepage/cadastro.ejs')
 })
 app.post('/cadastro', async (req,res) =>{
 
@@ -154,48 +158,26 @@ app.post('/cadastro', async (req,res) =>{
     try{
         await user.save()
         console.log('Registrado com sucesso')
-        return res.redirect('/')
+        return res.redirect('./homepage/login')
         
     }catch(error){
         console.log('Aconteceu um erro')
     }
 })
 
-///////////////////
+
+
 //LOGIN USUÁRIO\\
 app.get('/login', function(req,res){
-    res.render('login.ejs')
-})
+    res.render('./homepage/login.ejs', {msg : req.flash('msg')})
+ })
+ app.post('/login', passport_config.authenticate('local', {
+     successRedirect: '/usuarioindex',
+     failureRedirect: '/login',
+     failureFlash: true
+ }))
 
-app.post('/login', async (req,res) =>{
-    const {txtEmail, txtSenha} = req.body
-    let erro = []
 
-    //Validações
-    if(!txtEmail){
-        erro.push({msg : 'O email é Obrigatório'})
-    }if(!txtSenha){
-        return console.log('A senha é Obrigatório')
-    }
-    //checar se existe o usuário
-    const user = await Usuario.findOne({ email: txtEmail})
-
-    if(!user){
-        return console.log('Usuário não encontrado')
-    }
-
-    //checar se a senha confirma
-    const checarSenha = await bcrypt.compare(txtSenha, user.senha)
-
-    if(!checarSenha){
-        return console.log('Senha inválida')
-    }
-    try{
-        return console.log('Logado com sucesso')
-    }catch(Error){
-        console.log('Aconteceu um erro')
-    }
-})
 
 //AMD LOGIN//
 app.get('/admlogin', function(req,res){
@@ -224,11 +206,13 @@ app.post('/admlogin', async (req,res) =>{
     }
     try{
 
-        return console.log('Logado com sucesso')
+        return res.redirect('/usuarioindex')
     }catch(Error){
         console.log('Aconteceu um erro')
     }
 })
+
+
 
 //ADM CADASTRO//
 app.get('/admcadastro', function(req,res){
@@ -274,6 +258,24 @@ app.post('/admcadastro', async (req,res) =>{
         console.log('Aconteceu um erro')
     }     
 })   
+
+
+
+//Rotas ADM//
+app.get('/homepageadm', function(req,res){
+    res.render('./adm/homepageAdm.ejs')
+})
+app.post('/homepageadm', function(req,res){
+    
+})
+
+
+//Rotas Usuário//
+app.get('/usuarioindex', autenticacao.autenticacao(), function(req,res){
+    Usuario.find({}).exec(function(err,docs){
+        res.render('./usuario/usuarioIndex.ejs',{Usuario:docs})
+    })
+})
 app.listen(3000, function(){
     console.log("Conexão inicializada na porta 3000")
     }  
