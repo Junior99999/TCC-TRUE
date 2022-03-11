@@ -19,6 +19,7 @@ var Adm = require('./model/Administrador')
 var Usuario = require ('./model/Usuario')
 const autenticacao = require('./config/autenticacao')
 const autenticacaoAdm = require('./config/autenticacaoAdm')
+const methodOverride = require('method-override') 
 
 const app = express()
 
@@ -37,6 +38,7 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(methodOverride('_method'))
 
 
 
@@ -117,7 +119,7 @@ app.post('/edit/:id',upload.single("txtFoto") ,function(req,res){
 
 //CADASTRO USUÁRIO\\
 app.get('/cadastro', function(req,res){
-    res.render('./homepage/cadastro.ejs')
+    res.render('./homepage/cadastro.ejs',{msg : req.flash('msg')})
 })
 app.post('/cadastro', async (req,res) =>{
 
@@ -137,14 +139,21 @@ app.post('/cadastro', async (req,res) =>{
     }
 
     if(txtSenha !== txtConfirmasenha){
-        return console.log('A senhas não conferem')
+        req.flash('msg', 'As senhas não conferem!')
+        return res.redirect('/cadastro')
     }
 
     const userExist  = await Usuario.findOne({ email: txtEmail})
+    const cpfExist = await Usuario.findOne({cpf:txtCPF})
     
     if(userExist){
-        return console.log('Utilize outro email!')
+         req.flash('msg', 'O Email: '+ txtEmail +' já existe. Faça seu Login!')
+         return res.redirect('/login')
+    }if(cpfExist){  
+        req.flash('msg', 'Já existe esse CPF. Faça seu Login!')
+       return res.redirect('/login')
     }
+    
 
     const salt = await bcrypt.genSalt(12)
     const senhaHash = await bcrypt.hash(txtSenha, salt)
@@ -157,8 +166,9 @@ app.post('/cadastro', async (req,res) =>{
     })
     try{
         await user.save()
-        console.log('Registrado com sucesso')
-        return res.redirect('./homepage/login')
+        req.flash('msg',  'Você já pode se logar!')
+        res.redirect('/login')
+        
         
     }catch(error){
         console.log('Aconteceu um erro')
@@ -171,7 +181,7 @@ app.post('/cadastro', async (req,res) =>{
 app.get('/login', function(req,res){
     res.render('./homepage/login.ejs', {msg : req.flash('msg')})
  })
- app.post('/login', passport_config.authenticate('local', {
+ app.post('/login',passport_config.authenticate('local', {
      successRedirect: '/usuarioindex',
      failureRedirect: '/login',
      failureFlash: true
@@ -265,16 +275,20 @@ app.post('/admcadastro', async (req,res) =>{
 app.get('/homepageadm', function(req,res){
     res.render('./adm/homepageAdm.ejs')
 })
-app.post('/homepageadm', function(req,res){
-    
+app.post('/homepageadm', function(req,res){ 
 })
 
 
 //Rotas Usuário//
 app.get('/usuarioindex', autenticacao.autenticacao(), function(req,res){
-    Usuario.find({}).exec(function(err,docs){
-        res.render('./usuario/usuarioIndex.ejs',{Usuario:docs})
-    })
+     res.render('./usuario/usuarioIndex.ejs', { nome: req.user.nome})
+})
+
+
+//LOGOUT//
+app.delete('/logout', function(req,res){
+    req.logOut()
+    res.redirect('/login')
 })
 app.listen(3000, function(){
     console.log("Conexão inicializada na porta 3000")

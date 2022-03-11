@@ -1,13 +1,16 @@
  <%-include('cabecalho.ejs')%>
        
 
-            <div class="divh1">
-                
-                
+            <header class="divh1">
+                <div class="title-unic" style="color: white;
+                border-bottom: 1px solid #f1bf5b ;">
+                    <center>
+                        <h1 >Training BobyBuider</h1></center>
+                </div>
                 <div class="divpaibotao">
                     <div class="botaoCabecalho">
                         <a class="Cadastrar" href="/cadastro">Cadastrar</a>
-                        <a class="Logar" href="/login">Login</a>
+                        <a class="Logar" href="/login">Logar</a>
                     </div>
                 </div>
                 <nav role="navigation">
@@ -21,22 +24,30 @@
               
                             <ul id="menu">
                                 <a href="#"><li>Página  Inicial</li></a>
-                                <a href="#"><li>Proficionais</li></a>
+                                <a href="#PRO"><li>Profissionais</li></a>
                                 <a href="#"><li>Informações</li></a>
                                 <a href="#"><li>Contato</li></a>
                             </ul>
                     </div>
                 </nav>
+            </header>
+
+            <div class="container-slide">
+                <input type="radio" name="slider" id="item-1" checked>
+                <input type="radio" name="slider" id="item-2">
+                <input type="radio" name="slider" id="item-3">
+                <div class="cards">
+                    <label class="card" for="item-1" id="song-1">
+                        <img src="/fotos/img1.jpg" alt="">
+                    </label>
+                    <label class="card" for="item-2" id="song-2">
+                        <img src="/fotos/img2.jpg" alt="">
+                    </label>
+                    <label class="card" for="item-3" id="song-3">
+                        <img src="/fotos/img3.jpg" alt="">
+                    </label>
+                </div>
             </div>
-
-
-            <div class="body">
-                <div class="carrossel"></div>
-                <div class="profissionais"></div>
-                <div class="Informações"></div>
-                <div class="Contato"></div>
-
-
-            </div>
-
+            
+                
 <%-include('rodape.ejs')%>
