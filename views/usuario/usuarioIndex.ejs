@@ -6,7 +6,7 @@
                     <center><h1>Site de Convenio</h1></center>
                 </div>
                 <div class="divpaibotao">
-                    <h1><%=nome%></h1>
+                   
                     <div class="botaoCabecalho">
                         <form action="/logout?_method=DELETE" method="post">
                             <button type="submit">Log out</button>
@@ -32,11 +32,8 @@
                 </nav>
             </div>
 <hr>
-            <div class="title" style="
-            padding-top: 160px;
-            margin-bottom: -100px;
-            color: rgb(0, 0, 0)  ;">
-            <center><h1>Titulo</h1></center>
-            </div>
+    <div class="nome-usuario">
+        <center><h1><%=nome%></h1></center>
+    </div>
 
 <%-include('rodape.ejs')%>

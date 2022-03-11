@@ -255,7 +255,9 @@ margin-right: 30px;
 .botaoCabecalho a:active:before {
     background: #b9b9b9;
    }
-
+/* .nome_usuario{
+    
+} */
    
 /* Configuracao Slides */
 input[type=radio]{

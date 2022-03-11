@@ -26,7 +26,7 @@ padding: 0;
 margin: 0;
 background: black;
 padding-top: 1px;
-padding-bottom: 100px;
+padding-bottom: 117px;
 
 }
 .lixeira{
@@ -219,7 +219,8 @@ margin-top: 10px;
     .Cadastrar{
         padding-left: 20px;
     }
-    .botaoCabecalho a{
+    .botaoCabecalho button{
+        margin-top: -10px;
     width: 140px;
      height: 45px;
      font-size: 24px;
@@ -233,7 +234,7 @@ margin-top: 10px;
      transition: all 0.5s;
      z-index: 1;
     }
-    .botaoCabecalho a:hover {
+    .botaoCabecalho button:hover {
         color: black;}
     .botaoCabecalho ::before{
         content: "";
@@ -249,10 +250,10 @@ margin-top: 10px;
         transform: translateY(-1px);
         transform: translateX(-9px);
     }
-    .botaoCabecalho a:hover::before{
+    .botaoCabecalho  button:hover::before{
         width: 115%;
     }
-    .botaoCabecalho a:active:before {
+    .botaoCabecalho button:active:before {
         background: #b9b9b9;
        }
     .body-slider-img{
