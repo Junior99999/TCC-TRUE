@@ -1,39 +1,131 @@
-<%-include('cabecalho.ejs')%>
-       
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="SHORTCUT ICON" href="fotos/logo.png">
+    <link rel="stylesheet" href="/css/usuarioIndex.css">
+</head>
+<body>
 
-<div class="divh1">
-                <div class="title-unic">
-                    <center><h1>Site de Convenio</h1></center>
-                </div>
-                <div class="divpaibotao">
-                   
-                    <div class="botaoCabecalho">
-                        <form action="/logout?_method=DELETE" method="post">
-                            <button type="submit">Log out</button>
-                        </form>
-                    </div>
-                </div>
-                <nav role="navigation">
-                    <div id="menuToggle">
-            
-                        <input type="checkbox" />
-            
-                        <span></span>
-                        <span></span>
-                        <span></span>
-              
-                            <ul id="menu">
-                                <a href="#"><li>Perfil</li></a>
-                                <a href="#PRO"><li>Treinadores</li></a>
-                                <a href="#"><li>Informações</li></a>
-                                <a href="#"><li>Contato</li></a>
-                            </ul>
-                    </div>
-                </nav>
+
+    <header class="cabecalho">
+        <div class="cabecalho-titulo">
+            <img class="cabecalho-imagem" src="/fotos/logo.png" alt="">
+            <div>
+                <h2 class="cabecalho-titulo-h">Training</h2>
+                <h1  class="cabecalho-titulo-h">BodyBuilder</h1>
+            </div>  
+        </div>
+        <div>
+            <img class="cabecalho-imagem2" src="/fotos/perfil.png" style="width: 60px; height: 60px;">
+        </div>
+    </header>
+
+<div class="body-div">
+
+    <main class="nav">
+
+        <div class="nav-foto-nome">
+
+            <img  src="/fotos/perfil.png" alt="" style="width: 60px; height: 60px; background-color: rgb(179, 179, 179); border: 3px solid rgb(179, 179, 179);">
+
+            <div style="background-color:rgb(179, 179, 179); width: 265px;">
+                <h3><%=nome%></h3>
+                <p>Em andamento</p>
             </div>
-<hr>
-    <div class="nome-usuario">
-        <center><h1><%=nome%></h1></center>
-    </div>
 
-<%-include('rodape.ejs')%>
+        </div>
+
+            <nav class="nav-perfil">
+                <i></i>
+                <li class="nav-perfil-li">
+                    <a style="width: 180px;" class="fancy" href="#">
+                        <span class="top-key"></span>
+                        <span class="text">HOME</span>
+                        <span class="bottom-key-1"></span>
+                        <span class="bottom-key-2"></span>
+                    </a>
+                </li>
+                <i></i>
+                <li class="nav-perfil-li">
+                    <a class="fancy" href="#treinador">
+                        <span class="top-key"></span>
+                        <span class="text">TREINADOR</span>
+                        <span class="bottom-key-1"></span>
+                        <span class="bottom-key-2"></span>
+                    </a>
+                </li>
+                <i></i>
+                <li class="nav-perfil-li">
+                    <a class="fancy" href="#perfil">
+                        <span class="top-key"></span>
+                        <span class="text">PERFIL</span>
+                        <span class="bottom-key-1"></span>
+                        <span class="bottom-key-2"></span>
+                    </a>
+                </li>
+                <i></i>
+                <form action="/logout?_method=DELETE" method="post">
+                    <button class="nav-perfil-btn" type="submit">
+                        <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024"><path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path></svg>
+                        <span>SAIR</span>
+                      </button>
+                </form>
+            </nav>
+            
+    </main>
+
+
+    <main class="perfil">
+
+        <div class="perfil-div-titulo">
+                <h3 style="padding-left: 50px;" >MEU PERFIL</h3>
+            <div class="perfil-div-titulo-a">
+                <a style="color: white; padding-left: 350px;" href="#">Editar e alterar dados do perfil </a>
+            </div>  
+        </div>
+
+
+        <div class="div-cadastro-perfil">
+
+            <div class="perfil-div-cadastro">
+                <h2>DADOS DO CADASTRO</h2>
+                <center>
+                    <h4 style="color: rgb(97, 96, 96); "><%=nome%></h4><br>
+                    <img class="perfil-div-img" src="/fotos/perfil.png" alt="" style="width: 300px; height: 300px; max-width: 300px; max-height: 300px;">
+                </center>
+            </div>
+            
+            <div class="perfil-div-form">
+                <form  method="post">
+                    <input type="hidden" value="<%=id%>">
+                    Email:  <input style=" margin-left: 9px;" class="perfil-div-form-input" type="email" name="txtEmail" placeholder="Email" value="<%=email%>"readonly><br><br>
+                    Senha:<input style=" margin-left: 3px;" class="perfil-div-form-input" type="password" name="txtSenha" placeholder="Senha" value="<%=senha%>"readonly><br><br>
+                    <a class="perfil-div-form-a" href="/edita/<%=id%>">Editar</a>
+                </form>
+            </div>
+           
+        </div>
+        <a name="treinador"></a>
+        <div class="div-perfil2">
+            <div class="div-treinador-perfil">
+                
+                <h1>Treinador</h1>
+                <img class="perfil-div-img" src="/fotos/icone-menu.png" alt="" style="width: 300px; height: 300px;">
+                <a name="treinador"></a></h1><br><br><br><br><br><br><br>   
+                
+            </div>
+        </div>
+        
+        <a name="perfil"></a>
+        <div>
+            <div>
+                <img class="perfil-div-img" src="/fotos/icone-menu.png" alt="" style="width: 300px; height: 300px;">
+            </div>
+        </div>
+    </main>
+</div>  
+</body>
+</html>

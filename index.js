@@ -46,7 +46,7 @@ app.use(methodOverride('_method'))
 
 app.get('/',  function(req,res){
     Usuario.find({}).exec(function(err,docs){
-        res.render('./homepage/index.ejs',{Usuarios:docs})
+        res.render('./newHomepage/homepage.ejs',{Usuarios:docs})
     })
     
 })
@@ -99,7 +99,7 @@ app.get('/edit/:id', function(req,res){
         if(err){
             console.log(err)
         }else{
-            res.render('edita.ejs',{Usuario: docs})
+            res.render('/adm/edita.ejs',{Usuario: docs})
         } 
     })
 })
@@ -108,7 +108,7 @@ app.post('/edit/:id',upload.single("txtFoto") ,function(req,res){
     Usuario.findByIdAndUpdate(req.params.id,{
         nome: req.body.txtNome,
         email: req.body.txtEmail,
-        senha: req.body.txtSenha,
+        senha: senhaHash,
         foto: req.file.filename
     },function(err,docs){
         res.redirect('/')
@@ -187,8 +187,8 @@ app.get('/login', function(req,res){
      failureFlash: true
  }))
 
-
-
+ 
+ 
 //AMD LOGIN//
 app.get('/admlogin', function(req,res){
     res.render('./adm/loginAdm.ejs')
@@ -281,9 +281,36 @@ app.post('/homepageadm', function(req,res){
 
 //Rotas Usuário//
 app.get('/usuarioindex', autenticacao.autenticacao(), function(req,res){
-     res.render('./usuario/usuarioIndex.ejs', { nome: req.user.nome})
+        res.render('./usuario/usuarioindex.ejs', { id: req.user.id ,nome:req.user.nome, email:req.user.email, senha:req.user.senha})
 })
 
+app.post('/usuarioindex', function(req,res){
+   res.redirect('/edit/usuario')
+})
+
+
+
+// Rota edita USUARIO
+
+app.get('/edita/:id',function(req,res){
+    Usuario.findById(req.params.id, function(err,docs){
+        res.render('./usuario/editaUsuario.ejs', {Usuarios:docs})
+    })
+})
+app.post('/edita/:id', upload.single("txtFoto"), async function(req,res){
+    Usuario.findByIdAndUpdate(req.params.id,
+        {
+        nome: req.body.txtNome,
+        email: req.body.txtEmail,
+        senha: req.body.txtSenha
+    },function(err,docs){
+        if(err){
+            console.log(err)
+        }else{
+        res.redirect('/usuarioIndex')
+        }
+    })
+})
 
 //LOGOUT//
 app.delete('/logout', function(req,res){

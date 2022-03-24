@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form  method="post" enctype="multipart/form-data">
+                ID: <input type="hidden" name="txtId" readonly value="<%=Usuarios._id%>">
+                Nome: <input type="text" name="txtNome" placeholder="Nome" value="<%=Usuarios.nome%>"><br>
+                Email: <input type="email" name="txtEmail" placeholder="Email" value="<%=Usuarios.email%>"><br>
+                Senha: <input type="password" name="txtSenha" placeholder="Senha" value="" required><br><br>
+                <button type="submit">Editar</button>
+                <a href="/usuarioindex">Voltar</a>
+    </form>
+
+</body>
+</html>

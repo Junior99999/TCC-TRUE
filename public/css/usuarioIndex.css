@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarala:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body{
+    width: 100%;
+    height: 100%;
+    font-size: 100%;
+    background-color: rgb(223, 219, 219);
+}
+.cabecalho{
+    width: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: space-between;
+    padding:2px;
+    background-color: rgb(105, 147, 240);
+}
+.body-div{
+    display: flex;
+    flex-direction: column;
+}
+.cabecalho-titulo{
+    font-family: 'Righteous', cursive;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: arow;
+    background-color: rgb(67, 117, 226);
+    border-right: 23px solid rgb(67, 117, 226);
+}
+.cabecalho-titulo-h{
+    color: white;
+}
+.cabecalho-imagem{
+    width: 120px;
+    height: 92px;
+}
+.cabecalho-imagem2{
+    background-color: white;
+    border-radius: 50%;
+}
+.nav-foto-nome{
+    font-family: 'Righteous', cursive;
+    position: fixed;
+    padding-top: 98px;
+    display: flex;
+    flex-direction: arow;
+}
+.nav-perfil{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: 'Righteous', cursive;
+    background-color: white;
+    padding-top: 20px;
+    padding-left: 50px;
+    margin-top: 158px;
+    position: fixed ;
+    width: 325px;
+    height: 100%;
+    list-style-type: none;
+}
+.nav-perfil a{
+    max-width: 180px;
+    min-width: 180px;
+    border-radius: 5px;
+
+}
+.perfil{  
+    /* border-radius: 10px; */
+    width: 1400px; 
+    background-color: white; 
+    margin-top: 130px;
+    margin-bottom: 50px;
+    margin-left: 390px;
+    height: 800px;
+}
+.perfil-div-titulo{
+    font-family: 'Righteous', cursive;
+    font-size: 20px;
+    padding: 0;
+    display: flex;
+    justify-content:left;
+    gap: 60px;
+    padding: 20px;
+    border-bottom:10px solid rgb(223, 219, 219) ;
+    background-color: rgb(151, 150, 150);
+}
+.perfil-div-cadastro{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 25px;
+    font-family: 'Righteous', cursive;
+}
+.div-cadastro-perfil{
+    align-items: center;
+    padding-top: 80px;
+    padding-left:200px;
+    padding-bottom: 200px;
+    display: flex;
+    flex-direction: arow;
+    gap: 30px;
+    box-shadow: 2px 2px 2px rgb(66, 66, 66);
+    border-radius: 3px;
+    border-bottom: 2px solid rgb(128, 127, 127);
+    border-right: 2px solid rgb(128, 127, 127);
+}
+.perfil-div-form{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Righteous', cursive;
+    font-size: 25px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 2px rgb(66, 66, 66);
+    border-radius: 3px;
+    border-bottom: 2px solid rgb(128, 127, 127);
+    border-right: 2px solid rgb(128, 127, 127);
+}
+.perfil-div-form-input{
+    font-size: 20px;
+    padding: 3px;
+}
+.perfil-div-form-a{
+    border: 1px solid black;
+    color: rgb(255, 255, 255);
+    background-color: black;
+    border-radius: 10px;
+    font-size: 23px;
+}
+.perfil-div-form-a:hover{
+    border: 1px solid black;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+.div-treinador{
+    margin-top: 50px;
+    background-color: white;
+    align-items: center;
+    padding-top: 80px;
+    padding-left:200px;
+    padding-bottom: 200px;
+    display: flex;
+    flex-direction: arow;
+    gap: 30px;
+    box-shadow: 2px 2px 2px rgb(66, 66, 66);
+    border-radius: 3px;
+    border-bottom: 2px solid rgb(128, 127, 127);
+    border-right: 2px solid rgb(128, 127, 127);
+}
+.div-perfil2{
+    margin-top: 50px;
+    background-color: white;
+    align-items: center;
+    padding-top: 80px;
+    padding-left:200px;
+    padding-bottom: 200px;
+    display: flex;
+    flex-direction: arow;
+    gap: 30px;
+    box-shadow: 2px 2px 2px rgb(66, 66, 66);
+    border-radius: 3px;
+    border-bottom: 2px solid rgb(128, 127, 127);
+    border-right: 2px solid rgb(128, 127, 127);
+}
+
+
+
+button {
+    font-family: 'Righteous', cursive;
+    font-size: 15px;
+    display: flex;
+    height: 3em;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee4b;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    border: 1px solid black;
+    background: #fff;
+   }
+   
+   button > svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+   }
+   
+   button:hover > svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+   }
+   
+   button:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+   }
+.fancy {
+    background-color: transparent;
+    border: 2px solid #000;
+    border-radius: 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin: 0;
+    outline: none;
+    overflow: visible;
+    padding: 1.25em 2em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    transition: all 0.3s ease-in-out;
+    user-select: none;
+    font-size: 13px;
+   }
+  
+.fancy::before {
+    content: " ";
+    width: 1.5625rem;
+    height: 2px;
+    background: black;
+    top: 50%;
+    left: 1.5em;
+    position: absolute;
+    transform: translateY(-50%);
+    transform-origin: center;
+    transition: background 0.3s linear, width 0.3s linear;
+}
+.fancy .text {
+    font-size: 1.125em;
+    line-height: 1.33333em;
+    padding-left: 2em;
+    display: block;
+    text-align: left;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+}
+.fancy .top-key {
+    height: 2px;
+    width: 1.5625rem;
+    top: -2px;
+    left: 0.625rem;
+    position: absolute;
+    background: #e8e8e8;
+    transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+.fancy .bottom-key-1 {
+    height: 2px;
+    width: 1.5625rem;
+    right: 1.875rem;
+    bottom: -2px;
+    position: absolute;
+    background: #e8e8e8;
+    transition: width 0.5s ease-out, right 0.3s ease-out;
+   }
+.fancy .bottom-key-2 {
+    height: 2px;
+    width: 0.625rem;
+    right: 0.625rem;
+    bottom: -2px;
+    position: absolute;
+    background: #e8e8e8;
+    transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+.fancy:hover {
+    color: white;
+    background: black;
+   } 
+   .fancy:hover::before {
+    width: 0.9375rem;
+    background: white;
+   }
+   .fancy:hover .text {
+    color: white;
+    padding-left: 1.5em;
+   }
+   .fancy:hover .top-key {
+    left: -2px;
+    width: 0px;
+   }
+   .fancy:hover .bottom-key-1,
+    .fancy:hover .bottom-key-2 {
+    right: 0;
+    width: 0;
+   }

@@ -40,7 +40,7 @@
           bottom: 0;
           height: 3px;
           width: 30px;
-          background-color: #eead2d;
+          background-color: rgb(15, 30, 71);
           border-radius: 25px;
       }
       .form .input-field {
@@ -62,10 +62,10 @@
           transition: all 0,3s ease;
       }
       .input-field input:is(:focus, :valid){
-          border-bottom-color: #eead2d;  
+          border-bottom-color: rgb(15, 30, 71);  
       }
       .input-field input:is(:focus, :valid) ~ i{
-          border-bottom-color: #eead2d;  
+          border-bottom-color: rgb(15, 30, 71);  
       }
       .input-field i {
           position: absolute;
@@ -75,7 +75,7 @@
           font-size: 23px;
       }
       .input-field input:is(:focus, :valid) ~ i{
-          color: #eead2d;  
+          color: rgb(15, 30, 71);  
       }
       .input-field i.icon{
          left: 0;
@@ -95,12 +95,12 @@
           font-weight: 500;
           letter-spacing: 1px;
           border-radius: 6px;
-          background-color: #eead2d;
+          background-color: rgb(15, 30, 71);
           cursor: pointer;
           transition: all 0,3s ease;
       }
       .button input:hover{
-          background-color: #f1bf5b;
+          background-color: rgb(75, 111, 212);
       }
       .form .login-signup{
          margin-top: 30px;
@@ -122,13 +122,13 @@
                 transition: all 0,3s ease;
             }
             .input-field button:is(:focus, :valid){
-                border-bottom-color: #eead2d;  
+                border-bottom-color: rgb(15, 30, 71);  
             }
             .input-field button:is(:focus, :valid) ~ i{
-                border-bottom-color: #eead2d;  
+                border-bottom-color: rgb(15, 30, 71);  
             }
             .input-field button:is(:focus, :valid) ~ i{
-                color: #eead2d;  
+                color: rgb(15, 30, 71);  
             }
             .form .button{
                 margin-top: 35px;
