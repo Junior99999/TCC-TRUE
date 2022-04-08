@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link REL="SHORTCUT ICON" HREF="fotos/cruz_vermelha.png">
+    <link rel="SHORTCUT ICON" href="/fotos/logo.png">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" type="text/css" href="/css/cadastro.css">
     <title>Página de Cadastro</title>
@@ -12,15 +12,15 @@
 <body>
     <div class="container">
         <div class="forms">
-            <div class="form login">
+            <div class="form login" >
                 <span class="title">Registrar-se</span>
-                <form method="post">
-
+                <form method="post" enctype="multipart/form-data">
                     <div class="input-field">
                         <input  type="text"
                                 name="txtNome"
                                 placeholder="Digite Seu Nome"
                                 autocomplete="off"
+                                minlength="10"
                                 required>
                         <i class="uil uil-user"></i>
                     </div>
@@ -68,6 +68,33 @@
                                 required>
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+                    <div class="input-field">
+                        <input  type="number" 
+                                class="password" 
+                                name="txtAltura"
+                                placeholder="Altura em 'cm'"
+                                min="0" max="215" maxlength="3" minlength="3" step="000.0" data-number-to-fixed="2" data-number-stepfactor="100" 
+                                required>
+                        <i class="uil uil-lock icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input  type="number" 
+                                class="password" 
+                                name="txtPeso"
+                                placeholder="Peso em Kg" 
+                                min="0" max="140"
+                                step="000.0" 
+                                maxlength="3" minlength="3"
+                                required>
+                        <i class="uil uil-lock icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input  type="file" 
+                                class="password" 
+                                name="txtFoto"
+                                placeholder="Sua foto" 
+                                required>
                     </div>
                     <div>
                     <center><p>

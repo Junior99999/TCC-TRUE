@@ -17,6 +17,8 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 var Adm = require('./model/Administrador')
 var Usuario = require ('./model/Usuario')
+var Dieta = require('./model/Dieta')
+var Treino = require('./model/Treino')
 const autenticacao = require('./config/autenticacao')
 const autenticacaoAdm = require('./config/autenticacaoAdm')
 const methodOverride = require('method-override') 
@@ -56,10 +58,14 @@ app.post('/', function(req,res){
     })    
 })
 
+//ROTA SOBRE O SITE//
+app.get('/sobre', (req,res) => {
+    res.render('./newHomepage/sobre.ejs')
+})
 
 //ADICIONAR\\
 app.get('/add', function(req,res){
-    res.render('./adm/adiciona.ejs')
+    res.render('./adm/adicionaPro.ejs')
 })
 
 app.post('/add',upload.single("txtFoto") ,function(req,res){
@@ -91,39 +97,13 @@ app.get('/del/:id',function(req,res){
     })
 })
 
-
-
-//EDITAR\\
-app.get('/edit/:id', function(req,res){
-    Usuario.findById(req.params.id, function(err,docs){
-        if(err){
-            console.log(err)
-        }else{
-            res.render('/adm/edita.ejs',{Usuario: docs})
-        } 
-    })
-})
-
-app.post('/edit/:id',upload.single("txtFoto") ,function(req,res){
-    Usuario.findByIdAndUpdate(req.params.id,{
-        nome: req.body.txtNome,
-        email: req.body.txtEmail,
-        senha: senhaHash,
-        foto: req.file.filename
-    },function(err,docs){
-        res.redirect('/')
-    })
-})
-
-
-
 //CADASTRO USUÁRIO\\
 app.get('/cadastro', function(req,res){
     res.render('./homepage/cadastro.ejs',{msg : req.flash('msg')})
 })
-app.post('/cadastro', async (req,res) =>{
+app.post('/cadastro', upload.single("txtFoto") ,async (req,res) =>{
 
-    const {txtNome, txtEmail, txtSenha, txtConfirmasenha, txtNumero, txtCPF} = req.body
+    const {txtNome, txtEmail, txtSenha, txtConfirmasenha, txtNumero, txtCPF, txtAltura,txtPeso, txtFoto} = req.body
 
     //Validações
     if(!txtNome){
@@ -162,7 +142,11 @@ app.post('/cadastro', async (req,res) =>{
         nome: req.body.txtNome,
         email: req.body.txtEmail,
         cpf: req.body.txtCPF,
+        altura:req.body.txtAltura,
+        peso:req.body.txtPeso,
+        numero: req.body.txtNumero,
         senha: senhaHash,
+        foto: req.file.filename
     })
     try{
         await user.save()
@@ -216,7 +200,7 @@ app.post('/admlogin', async (req,res) =>{
     }
     try{
 
-        return res.redirect('/usuarioindex')
+        return res.redirect('/cadastrotreinodieta')
     }catch(Error){
         console.log('Aconteceu um erro')
     }
@@ -228,7 +212,10 @@ app.post('/admlogin', async (req,res) =>{
 app.get('/admcadastro', function(req,res){
     res.render('./adm/cadastroAdm.ejs')
 })
-app.post('/admcadastro', async (req,res) =>{
+
+
+
+app.post('/admcadastro', upload.single('fotoAdm') ,async (req,res) =>{
 
     const {admNome, admEmail, admSenha, admConfirmasenha} = req.body
 
@@ -258,6 +245,7 @@ app.post('/admcadastro', async (req,res) =>{
         nome: req.body.admNome,
         email: req.body.admEmail,
         senha: senhaHash,
+        foto: req.file.fieldname
     })
     try{
         await user.save()
@@ -272,7 +260,7 @@ app.post('/admcadastro', async (req,res) =>{
 
 
 //Rotas ADM//
-app.get('/homepageadm', function(req,res){
+app.get('/homepageadm', autenticacaoAdm.autenticacaoAdm(),function(req,res){
     res.render('./adm/homepageAdm.ejs')
 })
 app.post('/homepageadm', function(req,res){ 
@@ -281,28 +269,48 @@ app.post('/homepageadm', function(req,res){
 
 //Rotas Usuário//
 app.get('/usuarioindex', autenticacao.autenticacao(), function(req,res){
-        res.render('./usuario/usuarioindex.ejs', { id: req.user.id ,nome:req.user.nome, email:req.user.email, senha:req.user.senha})
+    Dieta.findOne({}).exec((err1,docs1) => {
+        Treino.findOne({}).exec((err,docs2) => {
+            res.render('./usuario/usuarioindex.ejs', { 
+                id: req.user.id,
+                nome:req.user.nome,
+                email:req.user.email,
+                senha:req.user.senha,
+                peso:req.user.peso,
+                altura:req.user.altura,
+                foto:req.user.foto,
+                dieta: docs1,
+                treino: docs2,
+            })
+        })
+    })
+    
 })
 
 app.post('/usuarioindex', function(req,res){
    res.redirect('/edit/usuario')
 })
 
-
-
 // Rota edita USUARIO
 
-app.get('/edita/:id',function(req,res){
+app.get('/edita/:id', function(req,res){
     Usuario.findById(req.params.id, function(err,docs){
         res.render('./usuario/editaUsuario.ejs', {Usuarios:docs})
     })
 })
-app.post('/edita/:id', upload.single("txtFoto"), async function(req,res){
+app.post('/edita/:id', upload.single("txtFoto") , async function(req,res){
+    const salt = await bcrypt.genSalt(12)
+    const senhaHash = await bcrypt.hash(req.body.txtSenha, salt)
+
     Usuario.findByIdAndUpdate(req.params.id,
         {
         nome: req.body.txtNome,
         email: req.body.txtEmail,
-        senha: req.body.txtSenha
+        numero: req.body.txtNumero,
+        altura:req.body.txtAltura,
+        peso:req.body.txtPeso,
+        foto: req.file.filename,
+        senha: senhaHash
     },function(err,docs){
         if(err){
             console.log(err)
@@ -312,10 +320,44 @@ app.post('/edita/:id', upload.single("txtFoto"), async function(req,res){
     })
 })
 
+//CADASTRO DIETA E TREINO\\
+app.get('/cadastrotreinodieta', autenticacaoAdm.autenticacaoAdm(), (req,res) => {
+    Dieta.findOne({}).exec((err,docs) => {
+        res.render('./adm/cadTreinoDieta.ejs', )
+    })
+   
+})
+
+app.post('/cadastrodieta', upload.single('dieta'), (req,res) => {
+    var dieta = new Dieta({
+        foto: req.file.filename
+    })
+    dieta.save(function(err){
+        if(err){
+            console.log(err)
+        }else{
+            res.redirect('/cadastrotreinodieta')
+        }
+    })
+})
+
+app.post('/cadastrotreino', upload.single('treino'),(req,res) => {
+    var treino = new Treino({
+        foto: req.file.filename
+    })
+    treino.save(function(err){
+        if(err){
+            console.log(err)
+        }else{
+            res.redirect('/cadastrotreinodieta')
+        }
+    })
+})
+
 //LOGOUT//
 app.delete('/logout', function(req,res){
     req.logOut()
-    res.redirect('/login')
+    res.redirect('/')
 })
 app.listen(3000, function(){
     console.log("Conexão inicializada na porta 3000")

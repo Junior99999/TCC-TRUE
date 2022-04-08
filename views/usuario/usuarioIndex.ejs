@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="SHORTCUT ICON" href="fotos/logo.png">
     <link rel="stylesheet" href="/css/usuarioIndex.css">
+    <title> Perfil: <%=nome%></title>
 </head>
 <body>
 
@@ -28,12 +29,12 @@
     <main class="nav">
 
         <div class="nav-foto-nome">
-
-            <img  src="/fotos/perfil.png" alt="" style="width: 60px; height: 60px; background-color: rgb(179, 179, 179); border: 3px solid rgb(179, 179, 179);">
-
-            <div style="background-color:rgb(179, 179, 179); width: 265px;">
+            <div style="background-color: rgb(179, 179, 179) ;">
+                <img  src="/fotos/<%=foto%>" alt="" style="width: 70px; height: 70px; background-color: rgb(179, 179, 179); border: 3px solid rgb(179, 179, 179);border-radius: 50%;">
+            </div>
+            <div style="background-color:rgb(179, 179, 179); width: 265px; padding-top: 10px;">
                 <h3><%=nome%></h3>
-                <p>Em andamento</p>
+                <p>Perfil em Andamento</p>
             </div>
 
         </div>
@@ -94,7 +95,7 @@
                 <h2>DADOS DO CADASTRO</h2>
                 <center>
                     <h4 style="color: rgb(97, 96, 96); "><%=nome%></h4><br>
-                    <img class="perfil-div-img" src="/fotos/perfil.png" alt="" style="width: 300px; height: 300px; max-width: 300px; max-height: 300px;">
+                    <img class="perfil-div-img" src="/fotos/<%=foto%>" alt="" style="max-width: 300px; max-height: 300px; border-radius: 50%;">
                 </center>
             </div>
             
@@ -106,26 +107,51 @@
                     <a class="perfil-div-form-a" href="/edita/<%=id%>">Editar</a>
                 </form>
             </div>
-           
         </div>
         <a name="treinador"></a>
+        <br><br><br><br>
         <div class="div-perfil2">
+            
             <div class="div-treinador-perfil">
-                
-                <h1>Treinador</h1>
-                <img class="perfil-div-img" src="/fotos/icone-menu.png" alt="" style="width: 300px; height: 300px;">
-                <a name="treinador"></a></h1><br><br><br><br><br><br><br>   
-                
+                <div class="div-treinador-perfil-titulo">
+                    <center>
+                    <h1>Treinador</h1>
+                    <img class="perfil-div-img" src="/fotos/perfil.png" alt="" style="width: 300px; height: 300px;">
+                </center>
+                </div>  
+               <div class="div-treino-dieta">
+                   <div>
+                        <h3 >Treino</h3>
+                        <img src="/fotos/<%=treino.foto%>" alt="">
+                    </div>
+                    <div>
+                        <h3>Dieta</h3>
+                        <img src="/fotos/<%=dieta.foto%>" alt="">
+                    </div>  
+                    </div>
             </div>
+            
         </div>
         
+        
         <a name="perfil"></a>
-        <div>
+        <div class="div-perfil-usuario" >
             <div>
-                <img class="perfil-div-img" src="/fotos/icone-menu.png" alt="" style="width: 300px; height: 300px;">
+                <img class="perfil-usuario-img" src="/fotos/<%=foto%>" alt="" style="width: 300px; height: 300px; border-radius: 50%;">
+            </div>
+            <div class="perfil-usuario-dados">
+                <h3 class="perfil-usuario-dados-h3">Nome</h3>
+                <input class="perfil-usuario-dados-input" type="text" value="<%=nome%>" readonly>
+                <h3 class="perfil-usuario-dados-h3">Altura</h3>
+                <input class="perfil-usuario-dados-input" type="text" value="<%=altura%>" readonly>
+                <h3 class="perfil-usuario-dados-h3">Peso</h3>
+                <input class="perfil-usuario-dados-input" type="text" value="<%=peso%>" readonly>
             </div>
         </div>
     </main>
-</div>  
+    </div>  
+    <footer class="rodape">
+        <center><img  class="rodape-imagem" src="fotos/logo.png" alt=""></center>
+    </footer>
 </body>
 </html>

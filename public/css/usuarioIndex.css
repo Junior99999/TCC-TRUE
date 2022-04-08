@@ -23,12 +23,14 @@ body{
     background-color: rgb(105, 147, 240);
 }
 .body-div{
+    max-width: 100%;
+    min-width: 10%;
     display: flex;
     flex-direction: column;
 }
 .cabecalho-titulo{
-    font-family: 'Righteous', cursive;
-    border-radius: 5px;
+    font-family: 'Sarala', sans-serif;
+
     display: flex;
     flex-direction: arow;
     background-color: rgb(67, 117, 226);
@@ -46,7 +48,7 @@ body{
     border-radius: 50%;
 }
 .nav-foto-nome{
-    font-family: 'Righteous', cursive;
+    font-family: 'Sarala', sans-serif;
     position: fixed;
     padding-top: 98px;
     display: flex;
@@ -56,13 +58,13 @@ body{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    font-family: 'Righteous', cursive;
+    font-family: 'Sarala', sans-serif;
     background-color: white;
     padding-top: 20px;
     padding-left: 50px;
-    margin-top: 158px;
+    margin-top: 172px;
     position: fixed ;
-    width: 325px;
+    width: 335px;
     height: 100%;
     list-style-type: none;
 }
@@ -82,7 +84,7 @@ body{
     height: 800px;
 }
 .perfil-div-titulo{
-    font-family: 'Righteous', cursive;
+    font-family: 'Sarala', sans-serif;
     font-size: 20px;
     padding: 0;
     display: flex;
@@ -97,13 +99,14 @@ body{
     flex-direction: column;
     gap: 20px;
     font-size: 25px;
-    font-family: 'Righteous', cursive;
+    font-family: 'Sarala', sans-serif;
 }
 .div-cadastro-perfil{
+ 
     align-items: center;
     padding-top: 80px;
     padding-left:200px;
-    padding-bottom: 200px;
+    padding-bottom: 160px;
     display: flex;
     flex-direction: arow;
     gap: 30px;
@@ -116,7 +119,7 @@ body{
     padding: 30px;
     display: flex;
     flex-direction: column;
-    font-family: 'Righteous', cursive;
+    font-family: 'Sarala', sans-serif;
     font-size: 25px;
     align-items: center;
     justify-content: center;
@@ -161,7 +164,7 @@ body{
     background-color: white;
     align-items: center;
     padding-top: 80px;
-    padding-left:200px;
+    padding-left:60px;
     padding-bottom: 200px;
     display: flex;
     flex-direction: arow;
@@ -171,12 +174,65 @@ body{
     border-bottom: 2px solid rgb(128, 127, 127);
     border-right: 2px solid rgb(128, 127, 127);
 }
+.div-treinador-perfil{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+.div-treinador-perfil-titulo{
+    display: flex;
+    flex-direction: column;
+}
+.div-treino-dieta{
+    display: flex;
+
+}
+.div-perfil-usuario{
+    background-color: white;
+    margin-top: 100px;
+    
+    padding-top: 80px;
+    padding-bottom: 80px;
+    display: flex ;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 2px 2px 2px rgb(66, 66, 66);
+    border-radius: 3px;
+    border-bottom: 2px solid rgb(128, 127, 127);
+    border-right: 2px solid rgb(128, 127, 127);
+}
+.perfil-usuario-dados{
+    padding-right: 400px;
+}
+.perfil-usuario-dados-h3{
+    font-family: 'Sarala', sans-serif;
+    font-size: 25px;
+}
+.perfil-usuario-dados-input{
+    font-size: 25px;
+}
+.rodape{
+    position: relative;
+    background:linear-gradient(68.15deg,rgb(15, 30, 71),rgb(144, 171, 247));
+    margin-top: 2200px;
+    padding-bottom: -30px;
+    border-top: 0.4px solid #FFF2E7;
+}
+.rodape-imagem{
+    margin-top: 48px;
+    width: 100px;
+    height: 72px;
+}
+
+
 
 
 
 button {
-    font-family: 'Righteous', cursive;
+    font-family: 'Sarala', sans-serif;
     font-size: 15px;
+    font-weight: 600;
     display: flex;
     height: 3em;
     width: 100px;
